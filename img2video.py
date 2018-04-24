@@ -15,19 +15,12 @@ def isnum (num):
     except:
         return False
  
-#Numerically sorts filenames
-def image_sort (x,y):
-    x = int(x.split(".")[0])
-    y = int(y.split(".")[0])
-    return x-y
- 
 # Construct the argument parser and parse the arguments
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument("-e", "--extension", required=False, default='png', help="Extension name. default is 'png'.")
 arg_parser.add_argument("-o", "--output", required=False, default='output.mp4', help="Output video file. default is output.mp4")
 arg_parser.add_argument("-d", "--directory", required=False, default='.', help="Specify image directory.")
 arg_parser.add_argument("-fps", "--framerate", required=False, default='10', help="Set the video framerate.")
-#arg_parser.add_argument("-s", "--sort", required=False, default='numeric', help="Determines the type of file-order sort that will be used.")
 arg_parser.add_argument("-s", "--sort", required=False, default='None', help="Determines the type of file-order sort that will be used.")
 arg_parser.add_argument("-t", "--time", required=False, default='none', help="Sets the framerate so that the video length matches the time in seconds.")
 arg_parser.add_argument("-v", "--visual", required=False, default='false', help="If 'true' then will display preview window.")
@@ -38,7 +31,6 @@ dir_path = args['directory']
 ext = args['extension']
 output = args['output']
 framerate = args['framerate']
-sort_type = args['sort']
 time = args['time']
 visual = args['visual']
  
@@ -57,7 +49,7 @@ for f in os.listdir(dir_path):
     if f.endswith(ext):
         images.append(f)
  
-#Sort the files found in the directory
+#Sort the files found in the directory depends on file name
 images.sort()
  
 #Change framerate to fit the time in seconds if a time has been specified.
